@@ -1,0 +1,26 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container py-5">
+        <section class="text-center">
+                <h2 class="display-1">Welcome to</h2>
+                <img class="landing-page-images rounded-circle" src="/static/images/logo.jpg" alt="logo">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h4 class="my-4">Smartphones</h4>
+                    <img class="landing-page-images" src="/static/images/smartphone-landing-page.jpg" alt="logo">
+                </div>
+                <div class="col-md-4 mb-1">
+                    <h4 class="my-4">Laptops</h4>
+                    <img class="landing-page-images" src="/static/images/laptop-landing-page.jpg" alt="logo">
+                </div>
+                <div class="col-md-4 mb-1">
+                    <h4 class="my-4">Tablets</h4>
+                    <img class="landing-page-images" src="/static/images/tablet-landing-page.jpg" alt="logo">
+                </div>
+            </div>
+            <p class="display-4">Used devices from all over the country.</p>
+            <a class="btn btn-info" href="#">All Products</a>
+        </section>
+    </div>
+{% endblock %}
