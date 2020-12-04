@@ -1,26 +1,45 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 {% block content %}
+    <div class="jumbotron container">
+        <div class="d-flex align-items-center h-100">
+            <div class="container text-center py-1">
+                <h1 class="mb-3">Welcome to SecondTech</h1>
+                <img width="100" class="rounded-circle" src="/static/images/logo.jpg" alt="logo">
+                <div class="text-center py-3">
+                    <a class="btn btn-info" href="#">All Products</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <div class="container py-5">
-        <section class="text-center">
-                <h2 class="display-1">Welcome to</h2>
-                <img class="landing-page-images rounded-circle" src="/static/images/logo.jpg" alt="logo">
+        <div class="text-center">
             <div class="row">
                 <div class="col-md-4 mb-5">
                     <h4 class="my-4">Smartphones</h4>
                     <img class="landing-page-images" src="/static/images/smartphone-landing-page.jpg" alt="logo">
+                    <div class="text-center py-3">
+                        <a class="btn btn-info" href="#">View Smartphones</a>
+                    </div>
                 </div>
                 <div class="col-md-4 mb-5">
                     <h4 class="my-4">Laptops</h4>
                     <img class="landing-page-images" src="/static/images/laptop-landing-page.jpg" alt="logo">
+                    <div class="text-center py-3">
+                        <a class="btn btn-info" href="#">View Laptops</a>
+                    </div>
                 </div>
                 <div class="col-md-4 mb-5">
                     <h4 class="my-4">Tablets</h4>
                     <img class="landing-page-images" src="/static/images/tablet-landing-page.jpg" alt="logo">
+                    <div class="text-center py-3">
+                        <a class="btn btn-info" href="#">View Tablets</a>
+                    </div>
                 </div>
             </div>
             <p class="display-4">Used devices from all over the country.</p>
-            <a class="btn btn-info" href="#">All Products</a>
-        </section>
+        </div>
     </div>
 {% endblock %}

@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'secondtech_app',
+    'accounts',
+    'bootstrap4',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,3 +129,5 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
+
+LOGIN_URL = '/accounts/login/'

@@ -8,10 +8,11 @@
     <link rel="icon" type="image/png"
           href="https://t4.ftcdn.net/jpg/03/21/60/65/360_F_321606578_fBJ7x4sw4ZOoV7PGCeFo2Q8VrCUvUle0.jpg">
     <link rel="stylesheet" href="/static/css/base.css">
+    {% block stylesheet %}{% endblock %}
 </head>
 <body class="bg-light">
 {% include 'navbar/navbar.html' %}
-<div class="container">
+<div class="container-fluid">
     {% block content %}
         Your content here.
     {% endblock %}
