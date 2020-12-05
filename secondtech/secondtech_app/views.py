@@ -108,6 +108,7 @@ def edit_device(request, pk):
                 return redirect('details device', pk)
             context = {
                 'form': form,
+                'device': device,
             }
             return render(request, 'edit_device.html', context)
     else:
