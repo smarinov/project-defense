@@ -27,7 +27,7 @@ def view_devices(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             query = form.cleaned_data['text']
-            devices = Device.objects.filter(title__contains=query)
+            devices = Device.objects.filter(title__icontains=query)
             context = {
                 'devices': devices,
                 'form': form,
