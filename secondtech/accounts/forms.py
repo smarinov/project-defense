@@ -36,7 +36,10 @@ class ProfileForm(forms.ModelForm):
 
     def clean_phone_number(self):
         data = self.cleaned_data['phone_number']
-        if not len(data) == 10:
+        if "+359" in str(data):
+            if not len(data) == 13:
+                raise ValidationError("Please enter a valid phone number")
+        elif not len(data) == 10:
             raise ValidationError("Please enter a valid phone number")
         return data
 
