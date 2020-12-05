@@ -13,7 +13,10 @@
                 <a class="nav-link" href="{% url 'homepage' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">All Products</a>
+                <a class="nav-link" href="{% url 'view devices' %}">All Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'add device' %}">Add Device</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'about page' %}">About Us</a>
@@ -23,9 +26,10 @@
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'user profile' user.pk %}">
-                        <img width="30" class="rounded-circle" src="{{ user.userprofile.profile_picture.url }}" alt="photo">
+                        <img width="30" class="rounded-circle" src="{{ user.userprofile.profile_picture.url }}"
+                             alt="photo">
                     </a>
-                </li >
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href={% url 'logout user' %}>Logout</a>
                 </li>

@@ -1,0 +1,15 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1 class="text-center">Edit Device {{ device.title }}</h1>
+    <div class="row d-flex justify-content-center">
+        <form class="form" method="post" action="{% url 'edit device' device.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button class="btn btn-primary">Submit</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

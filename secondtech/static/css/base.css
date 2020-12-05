@@ -11,3 +11,9 @@ body {
     width: 200px;
 }
 
+hr {
+    height: 1px;
+    border: none;
+    color: #333;
+    background-color: #333;
+}

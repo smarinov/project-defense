@@ -21,19 +21,20 @@ def details_profile(request, pk):
         return render(request, 'accounts/profile.html', context)
 
 
+@login_required
 def delete_profile(request, pk):
     profile = User.objects.get(pk=pk)
-    if request.method == 'GET':
-        register_form = RegisterForm(instance=profile)
-
-        context = {
-            'profile': profile,
-            'register_form': register_form,
-        }
-        return render(request, 'accounts/delete_profile.html', context)
+    if request.user.pk == profile.pk or request.user.is_superuser:
+        if request.method == 'GET':
+            context = {
+                'profile': profile,
+            }
+            return render(request, 'accounts/delete_profile.html', context)
+        else:
+            profile.delete()
+            return redirect('homepage')
     else:
-        profile.delete()
-        return redirect('homepage')
+        return redirect('delete profile', pk)
 
 
 def register_user(request):
@@ -50,6 +51,8 @@ def register_user(request):
             user = register_form.save()
             profile = profile_form.save(commit=False)
             profile.user = user
+            if not request.FILES:
+                profile.profile_picture = 'profiles/default-profile.jpg'
             profile.save()
 
             login(request, user)

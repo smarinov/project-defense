@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <form method="post" action="{% url 'delete device' device.pk %}">
+            {% csrf_token %}
+            <div class="container">
+                <h1>Delete Your Listing</h1>
+                <p>Are you sure you want to delete your listing?</p>
+                <div class="clearfix">
+                    <a class="btn btn-success" href="{% url 'details device' device.pk %}">Cancel</a>
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

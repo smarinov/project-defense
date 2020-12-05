@@ -1,0 +1,57 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container device-card">
+        <h1 class="my-4">{{ device.title }}</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <img class="img-fluid" src="{{ device.image.url }}" alt="device image">
+                <h2 class="pt-5">{{ format_price }}$</h2>
+            </div>
+            <div class="col-md-4">
+                <h3 class="my-3">Description</h3>
+                <p>{{ device.description }}</p>
+                <h3 class="my-3">Device Details</h3>
+                <ul class="list-unstyled">
+                    <li>Brand: <span class="font-weight-bold">{{ device.brand }}</span></li>
+                    <li>Model: <span class="font-weight-bold">{{ device.model }}</span></li>
+                    <li>Storage Capacity: <span class="font-weight-bold">{{ device.storage_capacity }}GB</span></li>
+                    <li>RAM: <span class="font-weight-bold">{{ device.ram }}GB</span></li>
+                    <li>CPU Speed: <span class="font-weight-bold">{{ device.cpu_speed }}GHz</span></li>
+                    <li>Operating System: <span class="font-weight-bold">{{ device.os }}</span></li>
+                </ul>
+                {% if is_superuser or is_owner %}
+                    <a class="btn btn-primary mr-5" href="{% url 'edit device' device.id %}">Edit</a>
+                    <a class="btn btn-danger ml-5" href="{% url 'delete device' device.id %}">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+        <h3 class="my-4">Related Projects</h3>
+        <div class="row">
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

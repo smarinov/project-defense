@@ -1,0 +1,38 @@
+body {
+    background: #eee
+}
+
+.ratings i {
+    color: green
+}
+
+.install span {
+    font-size: 12px
+}
+
+.col-md-4 {
+    margin-top: 27px
+}
+
+.device-card {
+    background-image: url("/static/images/device-card-bg.jpg");
+}
+
+.card-btn-profile {
+    color: black;
+    text-transform: uppercase;
+    font-size: .66rem;
+    white-space: nowrap;
+    border: 1px solid #28242f;
+    border-radius: 2rem;
+    padding: .2rem .85rem .25rem;
+    font-style: normal;
+    font-weight: 700;
+    background-color: sienna;
+    text-decoration: none;
+}
+
+.card-btn-profile:hover {
+    text-decoration: none;
+}
+
