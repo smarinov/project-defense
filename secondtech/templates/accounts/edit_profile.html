@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1 class="text-center">Edit Profile {{ user.username }}</h1>
+    <div class="row d-flex justify-content-center">
+        <form class="form" method="post" action="{% url 'edit profile' user.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form user_form %}
+            {% bootstrap_form profile_form %}
+            {% buttons %}
+                <button class="btn btn-primary">Submit</button>
+                <a class="btn btn-success" href="{% url 'user profile' user.id %}">Cancel</a>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
