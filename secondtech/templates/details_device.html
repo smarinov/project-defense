@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8">
                 <img class="img-fluid" width="300" src="{{ device.image.url }}" alt="device image">
-                <h2 class="pt-5">{{ format_price }}$</h2>
+                <h2 class="pt-5 price-tag">{{ device.get_price }} BGN</h2>
             </div>
             <div class="col-md-4">
                 <h3 class="my-3">Description</h3>
@@ -15,43 +15,42 @@
                 <ul class="list-unstyled">
                     <li>Brand: <span class="font-weight-bold">{{ device.brand }}</span></li>
                     <li>Model: <span class="font-weight-bold">{{ device.model }}</span></li>
+                    <li>Color: <span class="font-weight-bold">{{ device.color }}</span></li>
                     <li>Storage Capacity: <span class="font-weight-bold">{{ device.storage_capacity }}GB</span></li>
                     <li>RAM: <span class="font-weight-bold">{{ device.ram }}GB</span></li>
                     <li>CPU Speed: <span class="font-weight-bold">{{ device.cpu_speed }}GHz</span></li>
                     <li>Operating System: <span class="font-weight-bold">{{ device.os }}</span></li>
                 </ul>
+                <h3 class="my-3">Contact Seller</h3>
+                <ul class="list-unstyled">
+                    <li>Seller: <a class="pt-2 font-weight-bold"
+                                   href="{% url 'user profile' device.user.id %}">{{ device.user }}
+                        <img width="30" height="30" class="rounded-circle"
+                             src="{{ device.user.userprofile.profile_picture.url }}" alt="user image"></a>
+                    </li>
+                </ul>
+
                 {% if is_superuser or is_owner %}
                     <a class="btn btn-primary mr-5" href="{% url 'edit device' device.id %}">Edit</a>
                     <a class="btn btn-danger ml-5" href="{% url 'delete device' device.id %}">Delete</a>
                 {% endif %}
             </div>
         </div>
-        <h3 class="my-4">Related Projects</h3>
+        <h3 class="my-4">More Products From <a href="{% url 'user profile' device.user.id %}">{{ device.user.username }}</a></h3>
+        {% if more_devices_from_this_user %}
         <div class="row">
-
-            <div class="col-md-3 col-sm-6 mb-4">
-                <a href="#">
-                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 mb-4">
-                <a href="#">
-                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 mb-4">
-                <a href="#">
-                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6 mb-4">
-                <a href="#">
-                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
+            {% for device in more_devices_from_this_user %}
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <a href="{% url 'details device' device.id %}">
+                        <h4 style="color: green">{{ device.title }}</h4>
+                        <img height="150" src="{{ device.image.url }}" alt="device image">
+                        <p class="more-devices-price-tag font-weight-bold">{{ device.get_price }} BGN</p>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
+        {% else %}
+            <h4 class="font-italic text-info">No devices found</h4>
+        {% endif %}
     </div>
 {% endblock %}

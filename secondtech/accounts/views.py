@@ -1,15 +1,17 @@
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from accounts.forms import RegisterForm, LoginForm, ProfileForm, EditUserForm
 from accounts.models import UserProfile
+from secondtech_core.decorators import group_required
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def details_profile(request, pk):
     if request.method == 'GET':
         profile = User.objects.get(pk=pk)
@@ -24,6 +26,7 @@ def details_profile(request, pk):
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def delete_profile(request, pk):
     profile = User.objects.get(pk=pk)
     if request.user.pk == profile.pk or request.user.is_superuser:
@@ -51,6 +54,8 @@ def register_user(request):
         profile_form = ProfileForm(request.POST, request.FILES)
         if register_form.is_valid() and profile_form.is_valid():
             user = register_form.save()
+            group = Group.objects.get(name='Regular User')
+            user.groups.add(group)
             profile = profile_form.save(commit=False)
             profile.user = user
             if not request.FILES:
@@ -68,6 +73,7 @@ def register_user(request):
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def edit_profile(request, pk):
     current_user = User.objects.get(pk=pk)
     current_profile = UserProfile.objects.get(user=current_user)
@@ -102,6 +108,7 @@ def edit_profile(request, pk):
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def change_password(request, pk):
     current_user = User.objects.get(pk=pk)
     if request.user.id == current_user.id or request.user.is_superuser:

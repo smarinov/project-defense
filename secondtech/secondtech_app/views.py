@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from secondtech_app.forms import DeviceForm, SearchForm
 from secondtech_app.models import Device
+from secondtech_core.decorators import group_required
 
 
 def homepage(request):
@@ -36,6 +37,7 @@ def view_devices(request):
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def add_device(request):
     if request.method == 'GET':
         context = {
@@ -59,6 +61,7 @@ def add_device(request):
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def delete_device(request, pk):
     device = Device.objects.get(pk=pk)
     if request.user.pk == device.user.pk:
@@ -75,22 +78,25 @@ def delete_device(request, pk):
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def details_device(request, pk):
     device = Device.objects.get(pk=pk)
     is_owner = device.user.id == request.user.id
     is_superuser = request.user.is_superuser
-    format_price = f"{device.price:.2f}"
+    more_devices_from_this_user = [more_devices for more_devices in Device.objects.filter(user=device.user) if
+                                   more_devices != device]
     context = {
         'device': device,
-        'format_price': format_price,
         'is_owner': is_owner,
         'is_superuser': is_superuser,
+        'more_devices_from_this_user': more_devices_from_this_user,
     }
 
     return render(request, 'details_device.html', context)
 
 
 @login_required
+@group_required(groups=['Regular User'])
 def edit_device(request, pk):
     device = Device.objects.get(pk=pk)
     if request.user.pk == device.user.pk or request.user.is_superuser:

@@ -17,3 +17,15 @@ hr {
     color: #333;
     background-color: #333;
 }
+
+.price-tag {
+    color: #09f;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.more-devices-price-tag {
+    color: #09f;
+}

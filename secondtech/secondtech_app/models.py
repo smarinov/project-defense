@@ -25,7 +25,11 @@ class Device(models.Model):
     cpu_speed = models.FloatField(blank=False)
     os = models.CharField(max_length=50, blank=False)
     price = models.FloatField(blank=False)
+    color = models.CharField(max_length=50, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.title}"
+
+    def get_price(self):
+        return f"{self.price:.2f}"

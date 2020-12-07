@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'secondtech_app',
     'accounts',
     'bootstrap4',
+    'secondtech_core',
 
     'django.contrib.admin',
     'django.contrib.auth',
