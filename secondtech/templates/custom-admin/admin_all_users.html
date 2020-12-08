@@ -1,0 +1,43 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container d-flex justify-content-center pb-5">
+        <h1>Hello, Admin</h1>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Username</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Location</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Total listings from user</th>
+            <th style="width: 20px"></th>
+            <th style="width: 20px"></th>
+            <th style="width: 20px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <th scope="row"><a href="{% url 'user profile' user.id %}">{{ user.id }}</a></th>
+            <td><img width="30" src="{{ user.userprofile.profile_picture.url }}" alt="user image"></td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.userprofile.location }}</td>
+            <td>{{ user.userprofile.phone_number }}</td>
+            <td><a class ="font-weight-bold" href="{% url 'admin all devices current user' user.id %}">{{ user.device_set.count }}</a></td>
+            <td><a class="btn btn-primary font-weight-bold" href="{% url 'user profile' user.id %}">View</a></td>
+            <td><a class="btn btn-warning font-weight-bold" href="{% url 'edit profile' user.id %}">Edit</a></td>
+            <td><a class="btn btn-danger font-weight-bold" href="{% url 'delete profile' user.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

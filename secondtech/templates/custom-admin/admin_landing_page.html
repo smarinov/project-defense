@@ -1,0 +1,21 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="text-center pb-5">
+        <h1 class="mb-5">Hello, Admin</h1>
+    </div>
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-2">
+                <a href="{% url 'admin all users' %}" class="btn btn-sq-lg btn-primary">
+                    View all Users
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'admin all devices' %}" class="btn btn-sq-lg btn-primary">
+                    View all Devices
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

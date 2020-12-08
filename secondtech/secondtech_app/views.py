@@ -64,7 +64,7 @@ def add_device(request):
 @group_required(groups=['Regular User'])
 def delete_device(request, pk):
     device = Device.objects.get(pk=pk)
-    if request.user.pk == device.user.pk:
+    if request.user.pk == device.user.pk or request.user.is_superuser:
         if request.method == 'GET':
             context = {
                 'device': device,

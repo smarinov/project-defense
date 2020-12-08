@@ -12,7 +12,7 @@ def group_required(groups=[]):
             if user_groups.intersection(groups_set):
                 return view_func(request, *args, **kwargs)
             else:
-                return HttpResponse('You are not authorized')
+                return HttpResponse('<h1>You are not authorized!</h1>')
 
         return wrapper
 

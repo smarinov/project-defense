@@ -1,0 +1,37 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container d-flex justify-content-center pb-5">
+        <h1>Hello, Admin</h1>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Price</th>
+            <th scope="col">Uploaded by</th>
+            <th style="width: 20px"></th>
+            <th style="width: 20px"></th>
+            <th style="width: 20px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for device in devices %}
+        <tr>
+            <th scope="row"><a href="{% url 'details device' device.id %}">{{ device.id }}</a></th>
+            <td><img width="30" src="{{ device.image.url }}" alt="device image"></td>
+            <td>{{ device.title }}</td>
+            <td>{{ device.type }}</td>
+            <td>{{ device.get_price }}$</td>
+            <td><a class="font-weight-bold" href="{% url 'user profile' device.user.id %}">{{ device.user }}</a></td>
+            <td><a class="btn btn-primary font-weight-bold" href="{% url 'details device' device.id %}">View</a></td>
+            <td><a class="btn btn-warning font-weight-bold" href="{% url 'edit device' device.id %}">Edit</a></td>
+            <td><a class="btn btn-danger font-weight-bold" href="{% url 'delete device' device.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

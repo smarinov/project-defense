@@ -23,5 +23,6 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('secondtech_app.urls')),
                   path('accounts/', include('accounts.urls')),
+                  path('custom-admin/', include('secondtech_custom_admin.urls')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -21,12 +21,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'about page' %}">About Us</a>
             </li>
+            {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin landing page' %}">ADMIN</a>
+                </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'user profile' user.pk %}">
-                        <img width="30" height="30" class="rounded-circle" src="{{ user.userprofile.profile_picture.url }}"
+                        <img width="30" height="30" class="rounded-circle"
+                             src="{{ user.userprofile.profile_picture.url }}"
                              alt="photo">
                     </a>
                 </li>
