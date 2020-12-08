@@ -9,8 +9,13 @@
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                    <img width="200" src="{{ profile.userprofile.profile_picture.url }}"
-                         alt="default image" class="img">
+                    {% if profile.userprofile.profile_picture.url %}
+                        <img width="200" src="{{ profile.userprofile.profile_picture.url }}"
+                             alt="default image" class="img">
+                    {% else %}
+                        <img width="200" src="/media/profiles/default-profile.jpg"
+                             alt="default image" class="img">
+                    {% endif %}
                 </div>
                 <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
                     <div class="container">
@@ -18,20 +23,23 @@
                     </div>
                     <hr>
                     <ul class="container details">
-                        <li><p><span class="fas fa-phone-alt" style="width:50px;"></span>{{ profile.userprofile.phone_number }}
+                        <li><p><span class="fas fa-phone-alt"
+                                     style="width:50px;"></span>{{ profile.userprofile.phone_number }}
                         </p></li>
                         <li><p><span class="fas fa-envelope" style="width:50px;"></span>{{ profile.email }}
                         </p></li>
-                        <li><p class="text-capitalize"><span class="fas fa-map-marked-alt" style="width:50px;"></span>{{ profile.userprofile.location }}</p>
+                        <li><p class="text-capitalize"><span class="fas fa-map-marked-alt"
+                                                             style="width:50px;"></span>{{ profile.userprofile.location }}
+                        </p>
                         </li>
                         <li><p><span class="glyphicon glyphicon-new-window one" style="width:50px;"></span><a href="#">www.example.com
                         </a></p></li>
                     </ul>
                     {% if is_superuser or is_owner %}
-                                        <a class="btn btn-success btn-sm" href="{% url 'edit profile' profile.id %}">Edit</a>
-                                        <a class="btn btn-info btn-sm" href="{% url 'change password' profile.id %}">Change Password</a>
-                                        <a class="btn btn-danger btn-sm" href="{% url 'delete profile' profile.id %}">Delete</a>
-                                    {% endif %}
+                        <a class="btn btn-success btn-sm" href="{% url 'edit profile' profile.id %}">Edit</a>
+                        <a class="btn btn-info btn-sm" href="{% url 'change password' profile.id %}">Change Password</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'delete profile' profile.id %}">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
