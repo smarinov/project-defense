@@ -43,5 +43,23 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <h4 class="font-italic">Leave a comment</h4>
+                {% if comment_form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ comment_form.text.errors }}
+                    </div>
+                {% endif %}
+                {{ comment_form.text }}
+                <button class="btn btn-primary mt-2">Send</button>
+            </form>
+        </div>
+        {% for comment in comments %}
+            <ul>
+            <li>{{ comment.text }}</li>
+            </ul>
+        {% endfor %}
     </div>
 {% endblock %}

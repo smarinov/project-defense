@@ -4,4 +4,9 @@
 
 li {
     margin-bottom: 10px;
+
+}
+
+ul li {
+    list-style-type: none;
 }

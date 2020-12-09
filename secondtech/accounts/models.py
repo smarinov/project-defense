@@ -3,6 +3,9 @@ from django.db import models
 
 
 # Create your models here.
+from django.utils import timezone
+
+
 class UserProfile(models.Model):
     PLOVDIV = 'plovdiv'
     SOFIA = 'sofia'
@@ -23,3 +26,10 @@ class UserProfile(models.Model):
     phone_number = models.CharField(max_length=30, blank=False)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    submitter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='submitter')
+    text = models.TextField(blank=False)
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
+    created_date = models.DateTimeField(default=timezone.now)

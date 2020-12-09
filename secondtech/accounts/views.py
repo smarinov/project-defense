@@ -5,24 +5,44 @@ from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from accounts.forms import RegisterForm, LoginForm, ProfileForm, EditUserForm
-from accounts.models import UserProfile
+from accounts.forms import RegisterForm, LoginForm, ProfileForm, EditUserForm, CommentForm
+from accounts.models import UserProfile, Comment
 from secondtech_core.decorators import group_required
 
 
 @login_required
 @group_required(groups=['Regular User'])
 def details_profile(request, pk):
+    profile = User.objects.get(pk=pk)
+    is_owner = profile.pk == request.user.pk
+    is_superuser = request.user.is_superuser
+    comments = Comment.objects.filter(receiver=profile).order_by('-created_date')
     if request.method == 'GET':
-        profile = User.objects.get(pk=pk)
-        is_owner = profile.pk == request.user.pk
-        is_superuser = request.user.is_superuser
         context = {
             'profile': profile,
             'is_owner': is_owner,
             'is_superuser': is_superuser,
+            'comments': comments,
+            'comment_form': CommentForm()
         }
         return render(request, 'accounts/profile.html', context)
+    else:
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.submitter = request.user
+            comment.receiver = profile
+            comment_form.save()
+            return redirect('user profile', pk)
+        else:
+            context = {
+                'profile': profile,
+                'is_owner': is_owner,
+                'is_superuser': is_superuser,
+                'comments': comments,
+                'comment_form': comment_form,
+            }
+            return render(request, 'accounts/profile.html', context)
 
 
 @login_required
