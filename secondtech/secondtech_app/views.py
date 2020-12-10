@@ -119,3 +119,66 @@ def edit_device(request, pk):
             return render(request, 'edit_device.html', context)
     else:
         return redirect('details device', pk)
+
+
+def view_smartphones(request):
+    form = SearchForm()
+    smartphones = Device.objects.filter(type='Smartphone')
+    if request.method == 'GET':
+        context = {
+            'smartphones': smartphones,
+            'form': form,
+        }
+        return render(request, 'only_smartphones.html', context)
+    else:
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['text']
+            smartphones = smartphones.filter(title__icontains=query)
+            context = {
+                'smartphones': smartphones,
+                'form': form,
+            }
+            return render(request, 'only_smartphones.html', context)
+
+
+def view_tablets(request):
+    form = SearchForm()
+    tablets = Device.objects.filter(type='Tablet')
+    if request.method == 'GET':
+        context = {
+            'tablets': tablets,
+            'form': form,
+        }
+        return render(request, 'only_tablets.html', context)
+    else:
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['text']
+            tablets = tablets.filter(title__icontains=query)
+            context = {
+                'tablets': tablets,
+                'form': form,
+            }
+            return render(request, 'only_tablets.html', context)
+
+
+def view_laptops(request):
+    form = SearchForm()
+    laptops = Device.objects.filter(type='Laptop')
+    if request.method == 'GET':
+        context = {
+            'laptops': laptops,
+            'form': form,
+        }
+        return render(request, 'only_laptops.html', context)
+    else:
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['text']
+            laptops = laptops.filter(title__icontains=query)
+            context = {
+                'laptops': laptops,
+                'form': form,
+            }
+            return render(request, 'only_laptops.html', context)

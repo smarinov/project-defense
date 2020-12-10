@@ -1,0 +1,53 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/static/css/devices.css">
+{% endblock %}
+{% block content %}
+    <form class="d-flex justify-content-center" method="post">
+        <div class="md-form my-0">
+            {% csrf_token %}
+            {{ form.text }}
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </form>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h4>Smartphones</h4>
+        </div>
+        <div class="row mt-2 g-1">
+            {% if smartphones %}
+                {% for smartphone in smartphones %}
+                    <div class="col-md-3 p-1">
+                        <div class="card p-2 device-card bg-light border border-dark">
+                            <div class="text-right">
+                                Uploaded by:
+                                <a class="card-btn-profile"
+                                   href="{% url 'user profile' smartphone.user.pk %}">{{ smartphone.user }}</a>
+                            </div>
+                            <div class="text-center mt-2 p-3">
+                                <img src="{{ smartphone.image.url }}" height="100" alt="device image"/>
+                                <span class="d-block font-weight-bold text-capitalize">{{ smartphone.title }}</span>
+                                <hr>
+                                <span class="font-weight-bold text-capitalize">{{ smartphone.type }}</span>
+                                <div class="d-flex flex-row align-items-center justify-content-center">
+                                    <i class="fa fa-map-marker"></i>
+                                    <small class="ml-1 text-capitalize">Location: {{ smartphone.user.userprofile.location }}</small>
+                                </div>
+                                <div class="price-tag d-flex justify-content-between mt-3 font-weight-bold">
+                                    <span>{{ smartphone.get_price }} BGN</span>
+                                    <a href="{% url 'details device' smartphone.pk %}"
+                                       class="btn btn-sm btn-outline-dark btn-dark text-white">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="container-fluid">
+                    <h4 class="d-flex justify-content-center text-info font-italic">No devices found</h4>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
