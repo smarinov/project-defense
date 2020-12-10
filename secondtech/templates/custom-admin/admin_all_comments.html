@@ -1,0 +1,31 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container d-flex justify-content-center pb-5">
+        <h1>Hello, Admin</h1>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Creation Date</th>
+            <th scope="col">Comment Submitter</th>
+            <th scope="col">Comment Receiver</th>
+            <th style="width: 20px"></th>
+            <th style="width: 20px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+        <tr>
+            <th scope="row">{{ comment.id }}</th>
+            <td>{{ comment.created_date }}</td>
+            <td><a class="font-weight-bold" href="{% url 'user profile' comment.submitter.id %}">{{ comment.submitter }}</a></td>
+            <td><a class="font-weight-bold" href="{% url 'user profile' comment.receiver.id %}">{{ comment.receiver }}</a></td>
+            <td><a class="btn btn-warning font-weight-bold" href="{% url 'edit comment' comment.id %}">Edit</a></td>
+            <td><a class="btn btn-danger font-weight-bold" href="{% url 'delete comment' comment.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

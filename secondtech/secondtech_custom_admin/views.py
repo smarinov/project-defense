@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from accounts.models import Comment
 from secondtech_app.models import Device
 
 
@@ -45,3 +46,14 @@ def view_admin_current_user_devices(request, pk):
     }
 
     return render(request, 'custom-admin/admin_all_devices_current_user.html', context)
+
+
+def view_admin_all_comments(request):
+    if not request.user.is_superuser:
+        return HttpResponse('<h1>You are not authorized!</h1>')
+    comments = Comment.objects.all().order_by('-id')
+    context = {
+        'comments': comments,
+    }
+
+    return render(request, 'custom-admin/admin_all_comments.html', context)
