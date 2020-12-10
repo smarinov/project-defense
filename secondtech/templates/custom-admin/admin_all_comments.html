@@ -19,7 +19,7 @@
         <tbody>
         {% for comment in comments %}
         <tr>
-            <th scope="row">{{ comment.id }}</th>
+            <th scope="row"><a href="{% url 'admin view comment' comment.id %}">{{ comment.id }}</a></th>
             <td>{{ comment.created_date }}</td>
             <td><a class="font-weight-bold" href="{% url 'user profile' comment.submitter.id %}">{{ comment.submitter }}</a></td>
             <td><a class="font-weight-bold" href="{% url 'user profile' comment.receiver.id %}">{{ comment.receiver }}</a></td>
