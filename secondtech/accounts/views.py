@@ -185,3 +185,49 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('homepage')
+
+
+@login_required
+@group_required(groups=['Regular User'])
+def edit_comment(request, pk):
+    comment = Comment.objects.get(pk=pk)
+    if request.user.pk == comment.submitter.pk or request.user.is_superuser:
+        if request.method == 'GET':
+            comment_form = CommentForm(instance=comment)
+            context = {
+                'comment': comment,
+                'comment_form': comment_form,
+            }
+            return render(request, 'accounts/edit_comment.html', context)
+        else:
+            comment_form = CommentForm(request.POST, instance=comment)
+            if comment_form.is_valid():
+                comment_form.save()
+                return redirect('user profile', comment.receiver.id)
+            else:
+                context = {
+                    'comment': comment,
+                    'comment_form': comment_form,
+                }
+                return render(request, 'accounts/edit_comment.html', context)
+    else:
+        return redirect('homepage')
+
+
+@login_required
+@group_required(groups=['Regular User'])
+def delete_comment(request, pk):
+    comment = Comment.objects.get(pk=pk)
+    current_profile = comment.receiver
+    if request.user.is_superuser or comment.submitter.pk == request.user.pk or comment.receiver.pk == request.user.pk:
+        if request.method == 'GET':
+            context = {
+                'comment': comment,
+            }
+            return render(request, 'accounts/delete_comment.html', context)
+        else:
+            comment.delete()
+            return redirect('user profile', current_profile.id)
+
+    else:
+        return redirect('homepage')

@@ -72,7 +72,7 @@ def delete_device(request, pk):
             return render(request, 'delete_device.html', context)
         else:
             device.delete()
-            return redirect('homepage')
+            return redirect('view devices')
     else:
         return redirect('homepage')
 

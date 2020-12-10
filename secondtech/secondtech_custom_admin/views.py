@@ -9,13 +9,7 @@ from secondtech_app.models import Device
 def view_admin_landing_page(request):
     if not request.user.is_superuser:
         return HttpResponse('<h1>You are not authorized!</h1>')
-    all_devices = Device.objects.all()
-    all_users = User.objects.all()
-    context = {
-        'all_devices': all_devices,
-        'all_users': all_users,
-    }
-    return render(request, 'custom-admin/admin_landing_page.html', context)
+    return render(request, 'custom-admin/admin_landing_page.html')
 
 
 def view_admin_all_devices(request):
