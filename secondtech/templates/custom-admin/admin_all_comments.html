@@ -13,6 +13,7 @@
             <th scope="col">Comment Receiver</th>
             <th style="width: 20px"></th>
             <th style="width: 20px"></th>
+            <th style="width: 20px"></th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
             <td>{{ comment.created_date }}</td>
             <td><a class="font-weight-bold" href="{% url 'user profile' comment.submitter.id %}">{{ comment.submitter }}</a></td>
             <td><a class="font-weight-bold" href="{% url 'user profile' comment.receiver.id %}">{{ comment.receiver }}</a></td>
+            <td><a class="btn btn-info font-weight-bold" href="{% url 'admin view comment' comment.id %}">View</a></td>
             <td><a class="btn btn-warning font-weight-bold" href="{% url 'edit comment' comment.id %}">Edit</a></td>
             <td><a class="btn btn-danger font-weight-bold" href="{% url 'delete comment' comment.id %}">Delete</a></td>
         </tr>

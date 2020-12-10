@@ -57,3 +57,13 @@ def view_admin_all_comments(request):
     }
 
     return render(request, 'custom-admin/admin_all_comments.html', context)
+
+
+def view_admin_comment(request, pk):
+    if not request.user.is_superuser:
+        return HttpResponse('<h1>You are not authorized!</h1>')
+    comment = Comment.objects.get(pk=pk)
+    context = {
+        'comment': comment,
+    }
+    return render(request, 'custom-admin/admin_view_comment.html', context)

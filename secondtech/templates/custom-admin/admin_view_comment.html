@@ -1,0 +1,32 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block stylesheet%}<link rel="stylesheet" href="/static/css/profile.css">{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="comments">
+                <div class="comment-box">
+                            <span class="commenter-pic">
+                                <img class="commenter-pic"
+                                     src="{{ comment.submitter.userprofile.profile_picture.url }}"
+                                     alt="photo">
+                                </span>
+                    {% if user.is_superuser or user == comment.submitter or user == comment.receiver %}
+                        <a class="btn btn-danger float-right ml-2"
+                           href="{% url 'delete comment' comment.id %}">Delete</a>
+                    {% endif %}
+                    {% if user.is_superuser or user == comment.submitter %}
+                        <a class="btn btn-primary float-right" href="{% url 'edit comment' comment.id %}">Edit</a>
+                    {% endif %}
+                    <span class="commenter-name">
+                                <a href="{% url 'user profile' comment.submitter.pk %}">{{ comment.submitter }}</a>
+                                    <span
+                                            class="comment-time">{{ comment.created_date }}
+                                    </span>
+                                </span>
+                    <p class="comment-txt more pl-5">{{ comment.text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
