@@ -15,7 +15,7 @@ def view_admin_landing_page(request):
 def view_admin_all_devices(request):
     if not request.user.is_superuser:
         return HttpResponse('<h1>You are not authorized!</h1>')
-    devices = Device.objects.all()
+    devices = Device.objects.all().order_by('-id')
     context = {
         'devices': devices,
     }
@@ -27,7 +27,7 @@ def view_admin_all_users(request):
     if not request.user.is_superuser:
         return HttpResponse('<h1>You are not authorized!</h1>')
 
-    users = User.objects.all()
+    users = User.objects.all().order_by('-id')
 
     context = {
         'users': users,
@@ -39,7 +39,7 @@ def view_admin_all_users(request):
 def view_admin_current_user_devices(request, pk):
     if not request.user.is_superuser:
         return HttpResponse('<h1>You are not authorized!</h1>')
-    devices = Device.objects.filter(user_id=pk)
+    devices = Device.objects.filter(user_id=pk).order_by('-id')
     context = {
         'devices': devices,
     }
