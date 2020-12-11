@@ -1,4 +1,4 @@
-class FormMixin():
+class FormMixin:
     def setup_form(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

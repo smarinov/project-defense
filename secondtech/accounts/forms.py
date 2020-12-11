@@ -41,6 +41,8 @@ class ProfileForm(forms.ModelForm):
                 raise ValidationError("Please enter a valid phone number")
         elif not len(data) == 10:
             raise ValidationError("Please enter a valid phone number")
+        elif not data.isdigit():
+            raise ValidationError("Please enter a valid phone number")
         return data
 
 
