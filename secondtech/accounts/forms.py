@@ -60,6 +60,18 @@ class EditUserForm(UserChangeForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 
+    def clean_first_name(self):
+        data = self.cleaned_data['first_name']
+        if not data.isalpha():
+            raise ValidationError('Please enter a valid First Name')
+        return data
+
+    def clean_last_name(self):
+        data = self.cleaned_data['last_name']
+        if not data.isalpha():
+            raise ValidationError('Please enter a valid First Name')
+        return data
+
 
 class CommentForm(forms.ModelForm, FormMixin):
     def __init__(self, *args, **kwargs):
