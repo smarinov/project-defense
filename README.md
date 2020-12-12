@@ -1,4 +1,4 @@
-de# SecondTech (Exam Project)
+# SecondTech (Exam Project)
 
 Web catalog for used electronic devices
 
