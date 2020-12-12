@@ -1,4 +1,4 @@
-# SecondTech (Exam Project)
+de# SecondTech (Exam Project)
 
 Web catalog for used electronic devices
 
@@ -27,7 +27,7 @@ Web catalog for used electronic devices
 
 # Devices
 1. Each device has: Title, Image, Description, Type, Brand, Model, Storage capcity, RAM, CPU Speed, OS, Price, Color
-2. Each devie has form validations for: CPU Speed, Price, RAM, Storage Capacity
+2. Each device has form validations for: CPU Speed, Price, RAM, Storage Capacity
 
 # Comment
 1. Each comment has: Submitter, Text, Receiver, Creation Date
